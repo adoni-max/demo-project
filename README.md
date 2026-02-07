@@ -1,0 +1,190 @@
+# Alex Chen Portfolio
+
+A professional, launch-ready portfolio website for a creative designer & developer. Built with modern web technologies and best practices.
+
+![Portfolio Preview](https://via.placeholder.com/1200x600/030712/6366f1?text=Alex+Chen+Portfolio)
+
+## 🌟 Features
+
+- **Modern Design** - Clean, dark-themed aesthetic with subtle animations
+- **Responsive Layout** - Fully responsive across all devices and screen sizes
+- **Accessibility** - WCAG compliant with proper ARIA labels and focus states
+- **SEO Optimized** - Complete meta tags, Open Graph, and Twitter cards
+- **Performance** - Optimized CSS, lazy loading, and smooth animations
+- **Custom Cursor** - Interactive cursor with hover effects
+- **Scroll Animations** - Reveal elements as you scroll
+- **Mobile Navigation** - Hamburger menu for mobile devices
+
+## 📁 Project Structure
+
+```
+alexchen-portfolio/
+├── public/                    # Static assets
+│   ├── images/               # Images (logo, photos, etc.)
+│   └── favicon.ico           # Site favicon
+├── src/                      # Source code
+│   ├── components/           # Reusable HTML components
+│   │   ├── hero.html
+│   │   ├── about.html
+│   │   ├── features.html
+│   │   ├── portfolio.html
+│   │   ├── contact.html
+│   │   └── footer.html
+│   ├── styles/               # Stylesheets
+│   │   └── main.css
+│   ├── scripts/              # JavaScript files
+│   │   └── app.js
+│   └── assets/               # Fonts, icons, etc.
+│       └── fonts/
+├── index.html                # Main entry point
+├── package.json              # NPM dependencies
+├── .gitignore               # Git ignore rules
+└── LICENSE                   # MIT License
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+- A local web server (optional, for development)
+
+### Local Development
+
+1. **Clone or download the repository**
+
+```bash
+git clone https://github.com/yourusername/alexchen-portfolio.git
+cd alexchen-portfolio
+```
+
+2. **Open in browser**
+
+Simply open `index.html` in your web browser:
+
+```bash
+# macOS
+open index.html
+
+# Windows
+start index.html
+
+# Linux
+xdg-open index.html
+```
+
+3. **Using a local server (recommended)**
+
+If you want to use a local development server:
+
+**Python:**
+```bash
+# Python 3
+python -m http.server 8000
+
+# Python 2
+python -m SimpleHTTPServer 8000
+```
+
+**Node.js:**
+```bash
+npx serve
+# or
+npx http-server
+```
+
+**PHP:**
+```bash
+php -S localhost:8000
+```
+
+Then visit `http://localhost:8000` in your browser.
+
+### Customization
+
+1. **Update content in `index.html`**
+   - Change text, links, and images
+   - Update meta tags for SEO
+
+2. **Customize colors in `src/styles/main.css`**
+   - Edit CSS custom properties in the `:root` selector
+   - Adjust colors, spacing, and typography
+
+3. **Update contact information**
+   - Change email in the contact section
+   - Update social media links
+
+## 📦 Deployment
+
+### Netlify
+
+1. Push your code to GitHub
+2. Connect your repository to Netlify
+3. Netlify will automatically detect and deploy your site
+
+### Vercel
+
+1. Install Vercel CLI:
+```bash
+npm i -g vercel
+```
+
+2. Deploy:
+```bash
+vercel
+```
+
+### GitHub Pages
+
+1. Push your code to a GitHub repository
+2. Go to Settings > Pages
+3. Select your branch and save
+
+### Traditional Hosting
+
+Upload these files to your web host:
+
+- `index.html`
+- `src/` folder (entire folder)
+- `public/` folder (entire folder)
+
+## 🎨 Professional Touches Included
+
+- **Favicon** - SVG-based favicon with fallback
+- **Meta Tags** - Complete SEO and Open Graph tags
+- **Contact Section** - Ready for form integration
+- **Footer** - Social links and copyright
+- **Loading States** - Smooth animations and transitions
+- **Error Handling** - Graceful fallbacks
+
+## 🔧 Technologies Used
+
+- **HTML5** - Semantic markup
+- **CSS3** - Modern CSS with custom properties
+- **JavaScript** - Vanilla JS (no frameworks required)
+- **Google Fonts** - Inter and Playfair Display
+
+## 📱 Browser Support
+
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to open an issue or submit a pull request.
+
+## 📧 Contact
+
+- **Email:** hello@alexchen.design
+- **Website:** https://alexchen.design
+- **LinkedIn:** https://linkedin.com/in/alexchen
+
+---
+
+Made with ❤️ by Alex Chen
