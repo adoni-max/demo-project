@@ -1,24 +1,26 @@
-# Alex Chen Portfolio
+# Adonyas Portfolio
 
 A professional, launch-ready portfolio website for a creative designer & developer. Built with modern web technologies and best practices.
 
-![Portfolio Preview](https://via.placeholder.com/1200x600/030712/6366f1?text=Alex+Chen+Portfolio)
+![Portfolio Preview](https://via.placeholder.com/1200x600/030712/6366f1?text=Adonyas+Portfolio)
 
-## 🌟 Features
+## ✨ Features
 
-- **Modern Design** - Clean, dark-themed aesthetic with subtle animations
+- **Modern Design** - Clean, dark-themed aesthetic with subtle animations and glowing accents
 - **Responsive Layout** - Fully responsive across all devices and screen sizes
 - **Accessibility** - WCAG compliant with proper ARIA labels and focus states
 - **SEO Optimized** - Complete meta tags, Open Graph, and Twitter cards
 - **Performance** - Optimized CSS, lazy loading, and smooth animations
 - **Custom Cursor** - Interactive cursor with hover effects
-- **Scroll Animations** - Reveal elements as you scroll
+- **Scroll Animations** - Reveal elements as you scroll with staggered delays
 - **Mobile Navigation** - Hamburger menu for mobile devices
+- **Cinematic Visuals** - Abstract geometric designs with animated accents
+- **Values-Driven** - Faith, family, and creativity at the core of the design
 
 ## 📁 Project Structure
 
 ```
-alexchen-portfolio/
+adonyas-portfolio/
 ├── public/                    # Static assets
 │   ├── images/               # Images (logo, photos, etc.)
 │   └── favicon.ico           # Site favicon
@@ -26,16 +28,15 @@ alexchen-portfolio/
 │   ├── components/           # Reusable HTML components
 │   │   ├── hero.html
 │   │   ├── about.html
-│   │   ├── features.html
-│   │   ├── portfolio.html
 │   │   ├── contact.html
-│   │   └── footer.html
+│   │   ├── footer.html
+│   │   └── philosophy.html
 │   ├── styles/               # Stylesheets
 │   │   └── main.css
-│   ├── scripts/              # JavaScript files
-│   │   └── app.js
-│   └── assets/               # Fonts, icons, etc.
-│       └── fonts/
+│   └── scripts/              # JavaScript files
+│       └── app.js
+├── css/                      # Compiled styles
+├── js/                       # Compiled scripts
 ├── index.html                # Main entry point
 ├── package.json              # NPM dependencies
 ├── .gitignore               # Git ignore rules
@@ -54,8 +55,8 @@ alexchen-portfolio/
 1. **Clone or download the repository**
 
 ```bash
-git clone https://github.com/yourusername/alexchen-portfolio.git
-cd alexchen-portfolio
+git clone https://github.com/adonyas/adonyas-portfolio.git
+cd adonyas-portfolio
 ```
 
 2. **Open in browser**
@@ -147,6 +148,8 @@ Upload these files to your web host:
 - `index.html`
 - `src/` folder (entire folder)
 - `public/` folder (entire folder)
+- `css/` folder (entire folder)
+- `js/` folder (entire folder)
 
 ## 🎨 Professional Touches Included
 
@@ -156,13 +159,17 @@ Upload these files to your web host:
 - **Footer** - Social links and copyright
 - **Loading States** - Smooth animations and transitions
 - **Error Handling** - Graceful fallbacks
+- **Custom Cursor** - Interactive mouse pointer with hover states
+- **Scroll Progress** - Visual indicator of scroll position
+- **Reveal Animations** - Elements animate in as you scroll
 
 ## 🔧 Technologies Used
 
 - **HTML5** - Semantic markup
-- **CSS3** - Modern CSS with custom properties
+- **CSS3** - Modern CSS with custom properties and animations
 - **JavaScript** - Vanilla JS (no frameworks required)
 - **Google Fonts** - Inter and Playfair Display
+- **SVG Icons** - Lightweight, scalable vector graphics
 
 ## 📱 Browser Support
 
@@ -181,10 +188,10 @@ Contributions, issues, and feature requests are welcome! Feel free to open an is
 
 ## 📧 Contact
 
-- **Email:** hello@alexchen.design
-- **Website:** https://alexchen.design
-- **LinkedIn:** https://linkedin.com/in/alexchen
+- **Email:** hello@adonyas.design
+- **Website:** https://adonyas.design
+- **LinkedIn:** https://linkedin.com/in/adonyas
 
 ---
 
-Made with ❤️ by Alex Chen
+Made with ❤️ by **Adonyas**
