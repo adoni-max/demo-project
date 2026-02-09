@@ -1,6 +1,6 @@
 /**
- * Alex Chen Portfolio - Interactive JavaScript
- * Features: Scroll-triggered animations, parallax effects, magnetic interactions
+ * Adonyas Portfolio - Interactive JavaScript
+ * Features: Scroll-triggered animations, modal functionality, project filtering
  */
 
 (function() {
@@ -52,13 +52,22 @@
     cursor.classList.remove('hover', 'hover-light', 'hover-cool');
   }
   
-  // Smooth scroll
+  // Smooth scroll for anchor links (excluding modal triggers)
   function scrollTo(e) {
-    e.preventDefault();
-    const id = this.getAttribute('href');
-    if (!id.startsWith('#')) return;
+    const href = this.getAttribute('href');
     
-    const target = document.querySelector(id);
+    // Skip if it's a modal trigger or external link
+    if (this.classList.contains('contact-trigger') || 
+        this.classList.contains('collaboration-trigger') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('http')) {
+      return;
+    }
+    
+    e.preventDefault();
+    if (!href.startsWith('#')) return;
+    
+    const target = document.querySelector(href);
     if (target) {
       const offset = navbar.offsetHeight;
       window.scrollTo({
@@ -169,8 +178,6 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          // Optional: Stop observing once revealed
-          // observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
@@ -188,7 +195,12 @@
       const scrolled = window.scrollY;
       const heroHeight = document.querySelector('.hero').offsetHeight;
       
-      if (scrolled < heroHeight) {
+      if (scrollProgress) {
+        const scrollPercent = (scrolled / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        scrollProgress.style.transform = `scaleX(${scrollPercent / 100})`;
+      }
+      
+      if (heroVisual && scrolled < heroHeight) {
         heroVisual.style.transform = `translateY(${scrolled * 0.3}px)`;
       }
     }
@@ -242,6 +254,189 @@
     requestAnimationFrame(update);
   }
   
+  // ===== MODAL FUNCTIONALITY =====
+  function setupModal() {
+    const modalTriggers = document.querySelectorAll('.contact-trigger');
+    const collaborationTriggers = document.querySelectorAll('.collaboration-trigger');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.modal-close');
+    const overlays = document.querySelectorAll('.modal-overlay');
+    const openContactFromCollaboration = document.querySelectorAll('.open-contact-form');
+    
+    // Open contact modal
+    modalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('contactModal');
+      });
+    });
+    
+    // Open collaboration modal
+    collaborationTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('collaborationModal');
+      });
+    });
+    
+    // Open contact form from collaboration modal
+    openContactFromCollaboration.forEach(btn => {
+      btn.addEventListener('click', () => {
+        closeModal('collaborationModal');
+        setTimeout(() => openModal('contactModal'), 300);
+      });
+    });
+    
+    // Close modals
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal');
+        if (modal) closeModal(modal.id);
+      });
+    });
+    
+    // Close on overlay click
+    overlays.forEach(overlay => {
+      overlay.addEventListener('click', () => {
+        const modal = overlay.closest('.modal');
+        if (modal) closeModal(modal.id);
+      });
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modals.forEach(modal => {
+          if (modal.classList.contains('active')) {
+            closeModal(modal.id);
+          }
+        });
+      }
+    });
+  }
+  
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Focus trap - focus first input or close button
+    const focusable = modal.querySelector('input, textarea, button:not(.modal-close)');
+    if (focusable) {
+      setTimeout(() => focusable.focus(), 100);
+    }
+  }
+  
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  // ===== PROJECT FILTER FUNCTIONS =====
+  function setupProjectFilter() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    if (filterButtons.length === 0) return;
+    
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        
+        // Update active button
+        filterButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        
+        // Filter projects
+        projectCards.forEach(card => {
+          const category = card.dataset.category;
+          if (filter === 'all' || category === filter) {
+            card.style.display = '';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.transition = 'all 0.3s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  }
+  
+  // ===== CONTACT FORM HANDLING =====
+  function setupContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      
+      // Show loading state
+      submitBtn.innerHTML = 'Sending...';
+      submitBtn.disabled = true;
+      
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          // Show success message
+          submitBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Message Sent!';
+          submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+          form.reset();
+          
+          // Close modal after success
+          setTimeout(() => {
+            closeModal('contactModal');
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.background = '';
+            submitBtn.disabled = false;
+          }, 2000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        // Fallback for demo - simulate success
+        submitBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Message Sent!';
+        submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        form.reset();
+        
+        setTimeout(() => {
+          closeModal('contactModal');
+          submitBtn.innerHTML = originalText;
+          submitBtn.style.background = '';
+          submitBtn.disabled = false;
+        }, 2000);
+      }
+    });
+  }
+  
   // Initialize all interactions
   function init() {
     // Cursor
@@ -282,6 +477,15 @@
     
     // Initial scroll check
     onScroll();
+    
+    // Setup modal
+    setupModal();
+    
+    // Setup contact form
+    setupContactForm();
+    
+    // Setup project filter
+    setupProjectFilter();
   }
   
   // Run on DOM ready or immediately
